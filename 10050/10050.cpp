@@ -9,13 +9,11 @@ struct Day
 
 	void set(bool b, unsigned short d)
 	{
-		if(d % 7 == 6)
+		if(d % 7 == 6 || d % 7 == 0)
 			return;
 		a = b;
 	}
 };
-
-
 
 int main()
 {
@@ -32,7 +30,7 @@ int main()
 		{
 			unsigned int hj;
 			std::cin >> hj;
-			for(unsigned int d = 1; d <= nday; d += hj)
+			for(unsigned int d = 0; d <= nday; d += hj)
 			{
 				s[d-1].set(true, d);
 			}
