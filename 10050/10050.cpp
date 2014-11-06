@@ -30,7 +30,7 @@ int main()
 		{
 			unsigned int hj;
 			std::cin >> hj;
-			for(unsigned int d = 0; d <= nday; d += hj)
+			for(unsigned int d = hj; d <= nday; d += hj)
 			{
 				s[d-1].set(true, d);
 			}
