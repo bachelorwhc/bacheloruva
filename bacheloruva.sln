@@ -5,22 +5,34 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bacheloruva", "bacheloruva.vcxproj", "{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "bacheloruva-python", "bacheloruva-python\bacheloruva-python.pyproj", "{72876170-FD4D-4581-8E92-093D60B620E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Debug|x64.ActiveCfg = Debug|x64
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Debug|x64.Build.0 = Debug|x64
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Debug|x86.ActiveCfg = Debug|Win32
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Debug|x86.Build.0 = Debug|Win32
+		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Release|Any CPU.ActiveCfg = Release|Win32
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Release|x64.ActiveCfg = Release|x64
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Release|x64.Build.0 = Release|x64
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Release|x86.ActiveCfg = Release|Win32
 		{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}.Release|x86.Build.0 = Release|Win32
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{72876170-FD4D-4581-8E92-093D60B620E7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

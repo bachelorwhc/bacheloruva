@@ -18,9 +18,6 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="10420.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{225E739D-EEF4-4EE1-AAE1-25C3D68EBA11}</ProjectGuid>
     <RootNamespace>bacheloruva</RootNamespace>
