@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>72876170-fd4d-4581-8e92-093d60b620e7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>10106.py</StartupFile>
+    <StartupFile>10127.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -27,6 +27,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="10106.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="10127.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="424.py">
