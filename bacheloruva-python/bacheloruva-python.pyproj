@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>72876170-fd4d-4581-8e92-093d60b620e7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>686.py</StartupFile>
+    <StartupFile>10003.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,9 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="10003.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="10106.py">
       <SubType>Code</SubType>
     </Compile>
