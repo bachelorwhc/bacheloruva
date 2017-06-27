@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>72876170-fd4d-4581-8e92-093d60b620e7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>10003.py</StartupFile>
+    <StartupFile>674.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -35,7 +35,19 @@
     <Compile Include="10127.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="10302.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="10921.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="10922.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="10924.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="10929.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="111.py">
@@ -51,6 +63,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="573.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="674.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="686.py">
