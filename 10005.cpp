@@ -76,10 +76,6 @@ void setCircle(Circle& circle, const std::vector<unsigned int>& triangle, const 
 		(t[2] * tri[1].x + t[1] * tri[0].x + t[0] * tri[2].x - t[0] * tri[1].x - t[1] * tri[2].x - t[2] * tri[0].x) / p / 2.0
 	);
 
-	Vec&& ad = circum - tri[0];
-	Vec&& ab = tri[1] - tri[0];
-	Vec&& ac = tri[2] - tri[0];
-
 	Vec max, min;
 	min.x = FLT_MAX; min.y = FLT_MAX;
 	max.x = FLT_MIN; max.y = FLT_MIN;
