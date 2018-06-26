@@ -59,8 +59,8 @@ int main()
         {
             for ( int j = i + 1; j <= n; ++j )
             {
-                if( map[ i ][ j ] == 0)
-                    map[i][j] = find_gcd( i, j );
+                if ( map[ i ][ j ] == 0 )
+                    map[ i ][ j ] = find_gcd( i, j );
                 sum += map[ i ][ j ];
             }
         }
