@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-#include <cstdio>
-#include <cmath>
+#include <algorithm>
 
 int main()
 {
@@ -21,6 +20,8 @@ int main()
             sum += pay;
             pays[ i ] = pay;
         }
+        std::sort( pays.begin(), pays.end() );
+
         int avg = sum / n;
         int remain = sum % n;
         int total{ 0 };
@@ -33,8 +34,8 @@ int main()
                 ++fill;
             }
         }
-        total += ( remain / fill ) * fill;
-        std::cout << std::fixed << std::setprecision( 2 ) << total / 100.0f << std::endl;
+        total += remain / 2;
+        std::cout << '$' << std::fixed << std::setprecision( 2 ) << total / 100.0f << std::endl;
     }
     return 0;
 }
