@@ -1,61 +1,109 @@
 #include <iostream>
-#include <utility>
 #include <vector>
-#include <algorithm>
 #include <cstring>
-#define VALUE_AT(table, i, j, pitch) (table[pitch * i + j])
+#include <algorithm>
+#ifdef _DEBUG
+#include <fstream>
+#endif
 
-using ItemInfo = std::pair<int, int>;
+struct ItemInfo
+{
+    int price;
+    int weight;
+};
 
-int main() {
-	int sets;
-	std::cin >> sets;
-	for (int _s = 0; _s < sets; ++_s) {
-		std::vector<ItemInfo> items;
-		std::vector<int> persons;
+ItemInfo operator+ ( const ItemInfo& lhs, const ItemInfo& rhs )
+{
+    ItemInfo ret;
+    ret.price = lhs.price + rhs.price;
+    ret.weight = lhs.weight + rhs.weight;
+    return ret;
+}
 
-		int item_count;
-		std::cin >> item_count;
-		for (int _i = 0; _i < item_count; ++_i) {
-			int price, weight;
-			std::cin >> price >> weight;
-			items.push_back({ price, weight });
-		}
-		int person_count;
-		std::cin >> person_count;
-		for (int _p = 0; _p < person_count; ++_p) {
-			int weight;
-			std::cin >> weight;
-			persons.push_back(weight);
-		}
-		std::sort(persons.begin(), persons.end());
-		std::sort(items.begin(), items.end(), [](ItemInfo& lhs, ItemInfo& rhs) {
-			return lhs.second < rhs.second;
-		});
+ItemInfo operator- ( const ItemInfo& lhs, const ItemInfo& rhs )
+{
+    ItemInfo ret;
+    ret.price = lhs.price - rhs.price;
+    ret.weight = lhs.weight - rhs.weight;
+    return ret;
+}
 
+bool operator< ( const ItemInfo& lhs, const ItemInfo& rhs )
+{
+    return lhs.weight < rhs.weight;
+}
 
-		std::vector<std::vector<int>> price_table;
-		std::vector<std::vector<int>> weight_table;
-		for (int i = 0; i < item_count + 1; ++i) {
-			price_table.push_back(std::vector<int>(item_count + 1));
-			weight_table.push_back(std::vector<int>(item_count + 1));
-		}
-		for (int i = 0; i < item_count; ++i) {
-			price_table[0][i + 1] = items[i].first;
-			weight_table[0][i + 1] = items[i].second;
-		}
-		for (int i = 0; i < item_count; ++i) {
-			price_table[i + 1][0] = items[i].first;
-			weight_table[i + 1][0] = items[i].second;
-		}
+int main()
+{
+    int set;
+    std::cin >> set;
 
-		int max = 0;
+#ifdef _DEBUG
+    std::ofstream file( "ans.txt" );
+#endif
 
-		for (int i = 1; i <= item_count; ++i) {
-			for (int j = 1; j <= item_count; ++j) {
-				if(weight_table[])
-			}
-		}
-	}
-	return 0;
+    for ( int _s = 0; _s < set; ++_s )
+    {
+#pragma region input
+        int item_count;
+        std::cin >> item_count;
+
+        std::vector<ItemInfo> items( item_count );
+        for ( int i = 0; i < item_count; ++i )
+        {
+            std::cin >> items[ i ].price >> items[ i ].weight;
+        }
+
+        std::sort( items.begin(), items.end() );
+
+        int person_count;
+        std::cin >> person_count;
+        std::vector<int> persons( person_count );
+
+        int max_carry = 0;
+        for ( int i = 0; i < person_count; ++i )
+        {
+            std::cin >> persons[ i ];
+            if ( persons[ i ] > max_carry )
+                max_carry = persons[ i ];
+        }
+#pragma endregion input
+
+        std::vector<int> weight_price_table;
+        weight_price_table.reserve( max_carry );
+
+        int total{ 0 };
+        for ( auto curr_carry : persons )
+        {
+            weight_price_table.clear();
+            weight_price_table.resize( curr_carry + 1 );
+
+            for ( const auto& item : items )
+            {
+                if ( item.weight > curr_carry )
+                    continue;
+                
+                for ( int i = curr_carry; i >= item.weight; --i )
+                {
+                    auto prev = weight_price_table[ i - item.weight ];
+                    weight_price_table[ i ] = std::max( prev + item.price,
+                                                        weight_price_table[ i ] );
+                }
+            }
+
+            total += weight_price_table.back();
+        }
+
+#ifdef _DEBUG
+        if ( file.is_open() )
+        {
+            file << total << std::endl;
+        }
+#endif
+        std::cout << total << std::endl;
+    }
+#ifdef _DEBUG
+    file.close();
+#endif
+    return 0;
 }
