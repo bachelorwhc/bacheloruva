@@ -3,8 +3,13 @@
 #include <map>
 #include <algorithm>
 #include <vector>
+#include <iomanip>
+#ifdef _DEBUG
+#include <fstream>
+#endif
 const int COIN_TYPE_COUNT = 11;
-
+const int BASE_UNIT = 5;
+const int MAX_AMOUNT = 30000;
 int MAP[ COIN_TYPE_COUNT ] =
 {
     5,
@@ -20,51 +25,55 @@ int MAP[ COIN_TYPE_COUNT ] =
     10000
 };
 
-const std::map<int, int> R_MAP =
-{
-    {5, 0}, { 10, 1 }, { 20, 2 }, { 50, 3 }, { 100, 4 }, { 200, 5 }, { 500, 6 }, { 1000, 7 }, { 2000, 8 }, { 5000, 9 }, { 10000, 10 },
-};
-
-int GetCombination( int n )
-{
-    //
-    //( n, 1 );
-    for ( int i = 0; i < n; ++i )
-    {
-        
-    }
-    return 0;
-}
-
 int main()
 {
     int before, after;
     char dot;
 
-    std::vector<int> table;
-    table.reserve( 30001 );
+#ifdef _DEBUG
+    std::ofstream file( "ans.txt" );
+#endif
+
+    std::vector<unsigned long long> table;
+    table.reserve( MAX_AMOUNT / BASE_UNIT + 1 );
 
     auto GetCombination = [ &table ]( int amount )
     {
         table.clear();
+        amount /= BASE_UNIT;
         table.resize( amount + 1 );
-        for ( int i = 0; i < COIN_TYPE_COUNT; ++i )
+        for ( auto& t : table )
+            t = 1;
+        table[ 0 ] = 0;
+        for ( int i = 1; i < COIN_TYPE_COUNT; ++i )
         {
-            const int coin = MAP[ i ];
-            for ( int j = amount; j >= coin; --j )
+            const int coin = MAP[ i ] / BASE_UNIT;
+            if ( coin > amount )
+                break;
+            ++table[ coin ];
+            for ( int j = coin; j <= amount; ++j )
             {
-                table[ j ] = ( j / coin ) * table[ coin ] + table[ j % coin ] + 1;
+                table[ j ] = table[ j - coin ] + table[ j ];
             }
         }
         return table[ amount ];
     };
+
+    GetCombination( MAX_AMOUNT );
 
     while ( std::cin >> before >> dot >> after )
     {
         int amount = before * 100 + after;
         if ( amount == 0 )
             break;
-        GetCombination( amount );
+        float print = amount / 100.f;
+        std::cout << std::setw( 6 ) << std::fixed << std::setprecision( 2 ) << print << std::setw( 17 ) << table[ amount / BASE_UNIT ] << std::endl;
+#ifdef _DEBUG
+        file << std::setw( 6 ) << std::fixed << std::setprecision( 2 ) << print << std::setw( 17 ) << table[ amount / BASE_UNIT ] << std::endl;
+#endif
     }
+#ifdef _DEBUG
+    file.close();
+#endif
     return 0;
 }
