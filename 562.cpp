@@ -31,35 +31,19 @@ int main()
         coins.sort();
         const int total = std::accumulate( coins.begin(), coins.end(), 0 );
 
-        std::vector<int> table( n + 1, total );
-        std::vector<int> rhs( n + 1 );
+        int table_length = ( total + 1 ) / 2;
+        std::vector<int> table( table_length + 1 );
+        table[ 0 ] = 1;
+        for ( const auto coin : coins )
+            for ( int i = table_length; i >= coin; --i )
+                table[ i ] = table[ i - coin ] || table[ i ];
 
-        int ans{ std::numeric_limits<int>::max() };
-        for ( int i = 1; i < n; ++i )
+        int mid = total / 2;
+        while ( table[mid] == 0 )
         {
-            int min{ std::numeric_limits<int>::max() };
-            int curr = rhs[ i - 1 ];
-            decltype( coins.begin() ) take = coins.end();
-            int diff = -1;
-            for ( auto it = coins.begin(); it != coins.end(); ++it )
-            {
-                int add = table[ i - 1 ] - *it;
-                diff = std::abs( total - add - add );
-                if( diff < min ) {
-                    min = diff;
-                    take = it;
-                }
-            }
-            if ( min < ans )
-                ans = min;
-            rhs[ i ] = *take + curr;
-            table[ i ] = table[ i - 1 ] - *take;
-            auto prev_diff = std::abs( rhs[ i - 1 ] - table[ i - 1 ] );
-            if ( min == 0 || min > prev_diff ) break;
-            if( take != coins.end() )
-                coins.erase( take );
+            --mid;
         }
-
+        int ans = std::abs( total - 2 * mid );
         std::cout << ans << std::endl;
 #ifdef _DEBUG
         file << ans << std::endl;
