@@ -8,39 +8,28 @@
 #include<fstream>
 #endif
 
-const uint32_t MAX_HALF = 214748364 / 2;
-bool raw_table_l[ MAX_HALF + 1 ];
-bool raw_table_r[ MAX_HALF + 1 ];
+const int32_t MAX = 65536;
+bool raw_table[ MAX + 1 ];
 std::vector<int32_t> table;
 
 void build_table()
 {
-    for ( int i = 0; i <= MAX_HALF; ++i ) {
-        raw_table_l[ i ] = true;
-        raw_table_r[ i ] = true;
+    for ( int i = 0; i <= MAX; ++i ) {
+        raw_table[ i ] = true;
     }
-    for ( uint32_t i = 2; i <= MAX_HALF * 2; ++i )
+    for ( uint32_t i = 2; i <= MAX; ++i )
     {
-        auto p_raw_table = i > MAX_HALF ? raw_table_r : raw_table_l;
-        auto base = i > MAX_HALF ? MAX_HALF : 0;
-        if ( false == p_raw_table[ i - base ] )
+        if ( false == raw_table[ i ] )
             continue;
-        for ( uint32_t j = 2; i * j < MAX_HALF * 2; ++j ) 
+        for ( uint32_t j = 2; i * j < MAX; ++j )
         {
-            auto base = ( i * j ) > MAX_HALF ? MAX_HALF : 0;
-            auto p_raw_table = ( i * j ) > MAX_HALF ? raw_table_r : raw_table_l;
-            p_raw_table[ i * j - base ] = false;
+            raw_table[ i * j ] = false;
         }
     }
-    for ( uint32_t i = 2; i <= MAX_HALF; ++i )
+    for ( uint32_t i = 2; i <= MAX; ++i )
     {
-        if ( raw_table_l[ i ] )
+        if ( raw_table[ i ] )
             table.push_back( i );
-    }
-    for ( uint32_t i = 2; i <= MAX_HALF; ++i )
-    {
-        if ( raw_table_r[ i ] )
-            table.push_back( i + MAX_HALF );
     }
 }
 
@@ -48,39 +37,66 @@ int main()
 {
     build_table();
     int n;
+#ifdef _DEBUG
+    std::ofstream file( "ans.txt" );
+#endif
+    
     while ( std::cin >> n && n != 0 )
     {
+        std::vector<int> prime_factors;
+#ifdef _DEBUG
+        file << n << " = ";
+#endif
         std::cout << n << " = ";
+        bool one_exist = false;
         if ( n < 0 )
         {
-            std::cout << "-";
+            prime_factors.push_back( -1 );
             n = -n;
+            one_exist = true;
         }
-        std::cout << "1";
-        if ( n <= MAX_HALF && raw_table_l[ n ] )
+        if ( n <= MAX && raw_table[ n ] )
         {
-            std::cout << " x " << n;
-        }
-        else if ( n > MAX_HALF && raw_table_r[ n - MAX_HALF ] )
-        {
-            std::cout << " x " << n;
+            prime_factors.push_back( n );
         }
         else
         {
+            bool is_prime = true;
             for ( auto p : table )
             {
                 if ( p > n )
                     break;
                 int r = n % p;
-                if ( 0 == r )
+                while ( 0 == r && n != 1 )
                 {
-                    std::cout << " x " << p;
+                    is_prime = false;
+                    prime_factors.push_back( p );
                     n /= p;
                     r = n % p;
                 }
             }
+            if( is_prime ) {
+                prime_factors.push_back( n );
+            }
         }
+#ifdef _DEBUG
+        file << prime_factors[ 0 ];
+#endif
+        std::cout << prime_factors[0];
+        for ( int i = 1; i < prime_factors.size(); ++i )
+        {
+#ifdef _DEBUG
+            file << " x " << prime_factors[ i ];
+#endif
+            std::cout << " x " << prime_factors[ i ];
+        }
+#ifdef _DEBUG
+        file << std::endl;
+#endif
         std::cout << std::endl;
     }
+#ifdef _DEBUG
+    file.close();
+#endif
     return 0;
 }
