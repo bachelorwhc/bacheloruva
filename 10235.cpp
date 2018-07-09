@@ -10,7 +10,7 @@ void build_table()
     int i = sizeof( table );
     for ( int i = 0; i < max; ++i )
         table[ i ] = 1;
-    for ( int i = 2; i < 1000001; ++i )
+    for ( int i = 2; i < max; ++i )
     {
         if ( table[ i ] == 0 )
             continue;
